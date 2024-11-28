@@ -1,14 +1,14 @@
 self.addEventListener('install', (e) => {
     e.waitUntil(
       caches.open('fox-store').then((cache) => cache.addAll([
-        '/DV-proyecto_final-pwa/index.html',
+        './index.html',
         /* '/css/custom.css',
         '/js/custom.js', */
 
-        '/DV-proyecto_final-pwa/assets/img/favicon.png',
-        '/DV-proyecto_final-pwa/assets/img/logo-md.png',
-        '/DV-proyecto_final-pwa/assets/img/logo.png',
-        '/DV-proyecto_final-pwa/pwa.js',
+        './assets/img/favicon.png',
+        './assets/img/logo-md.png',
+        './assets/img/logo.png',
+        './pwa.js',
       ])),
     );
 });
