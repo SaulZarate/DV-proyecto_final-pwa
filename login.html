@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    
+    <title>Inicio de sesión</title>
+    <meta content="" name="description">
+    <meta content="" name="keywords">
+
+    <!-- Favicons -->
+    <link href="./assets/img/favicon.png" rel="icon">
+    <link href="./assets/img/favicon.png" rel="apple-touch-icon">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.gstatic.com" rel="preconnect">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+    <!-- Vendor CSS Files -->
+    <link href="./assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="./assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- Mis estilos -->
+    <link rel="stylesheet" href="./assets/css/style.css">
+    
+</head>
+
+<body>
+    <!-- Font Awesome -->
+    <script src="https://kit.fontawesome.com/deecb3ce02.js" crossorigin="anonymous"></script>
+
+    <main class="bg-light">
+        <div class="shadow" style="
+            background-image: url('./assets/img/login-fondo.jpg');
+            background-repeat: no-repeat;
+            background-size: cover;
+            height: 100vh;
+            background-position: top;
+        ">
+            <div class="container">
+
+                <section class="section register min-vh-100 d-flex flex-column align-items-center justify-content-center py-4">
+                    <div class="container">
+                        <div class="row justify-content-center">
+                            <div class="col-lg-4 col-md-6 d-flex flex-column align-items-center justify-content-center">
+
+                                <!-- LOGO -->
+                                <div class="d-flex justify-content-center py-4">
+                                    <img src="./assets/img/logo-md.png" alt="Logo de la aplicación turapp" height="200">
+                                </div>
+
+                                <div class="card bg-light my-3">
+                                    <div class="card-body">
+                                        <form class="row pt-4 g-3" id="formLogin">
+
+                                            <div class="col-12">
+                                                <label for="email" class="form-label"><i class="fas fa-envelope me-1"></i>E-mail</label>
+                                                <input type="email" name="email" class="form-control" id="email" placeholder="pepito@gmail.com" required>
+                                            </div>
+
+                                            <div class="col-12">
+                                                <label for="password" class="form-label"><i class="fas fa-unlock-alt me-1"></i>Contraseña</label>
+                                                <input type="password" name="password" class="form-control" id="password" placeholder="*******" required>
+                                            </div>
+
+                                            <input type="hidden" name="action" value="login">
+
+                                            <div class="col-12">
+                                                <button class="btn btn-success w-100" type="button" onclick="handlerSubmit()"><i class="fas fa-sign-in-alt me-1"></i>Iniciar sesión</button>
+                                            </div>
+                                        </form>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </section>
+
+            </div>
+            
+        </div>
+    </main><!-- End #main -->
+
+
+    <!-- Alert 2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script src="./assets/js/nice-admin.js"></script>
+    <script src="./assets/js/main.js"></script>
+    
+    
+    <script>
+
+        document.addEventListener("DOMContentLoaded", e => {
+
+            const inputMail = document.getElementById("email")
+            const inputPassword = document.getElementById("password")
+
+
+            inputMail.addEventListener("keyup", function(event) {
+                
+                if(!isEmailValid(inputMail.value)) inputMail.classList.add("is-invalid")
+                else inputMail.classList.remove("is-invalid")
+
+                if (event.keyCode === 13) inputPassword.focus()
+            });
+
+            inputPassword.addEventListener("keyup", function(event) {
+                
+                if(inputPassword.value.length == 0) inputPassword.classList.add("is-invalid")
+                else inputPassword.classList.remove("is-invalid")
+                
+                if (event.keyCode === 13) handlerSubmit()
+            });
+
+        })
+
+        function handlerSubmit(){
+            /* const data = new FormData(document.getElementById("formLogin")) */
+
+            const email = document.getElementById("email").value.trim()
+            const password = document.getElementById("password").value.trim()
+
+            fetch(
+                `${URL_API}login`, 
+                {
+                    method: "POST",
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': 'Basic ' + btoa(`${email}:${password}`)
+                    }
+                }
+            )
+            .then(res => res.json())
+            .then(response => {
+                console.log(response)
+
+                /* if(response.status === "OK"){
+                    HTTP.redirect(response.redirection)
+                }else{
+                    const {title, message, type} = response
+                    Swal.fire(title, message, type)
+                } */
+            })
+
+        }
+    </script>
+</body>
+
+</html>
