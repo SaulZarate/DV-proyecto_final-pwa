@@ -1,5 +1,5 @@
 const APP_NAME = "TurApp";
-const URL_API = "http://dv-proyectofinal.infy.uk/api/v1/"
+const URL_API = "https://dv-proyectofinal.infy.uk/api/v1/"
 
 /* ----------------------- */
 /*      MIS FUNCIONES      */
