@@ -126,6 +126,7 @@
                 `${URL_API}login`, 
                 {
                     method: "POST",
+                    mode: "no-cors",
                     headers: {
                         'Content-Type': 'application/json',
                         'Authorization': 'Basic ' + btoa(`${email}:${password}`)
